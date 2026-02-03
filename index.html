@@ -480,7 +480,7 @@
 
         .plinko-board {
             width: 600px;
-            height: 400px;
+            height: 500px;
             background: linear-gradient(to bottom, #1a1a2e, #0f3460);
             border-radius: 10px;
             border: 3px solid #ffd700;
@@ -533,7 +533,7 @@
             margin: 40px 0;
         }
 
-        .crash-graph {
+        .crash-container {
             width: 100%;
             height: 300px;
             background: rgba(0, 0, 0, 0.3);
@@ -544,14 +544,39 @@
             margin: 20px 0;
         }
 
-        .crash-line {
+        .crash-rocket {
             position: absolute;
-            left: 0;
+            left: 50%;
             bottom: 0;
-            width: 100%;
-            height: 3px;
-            background: #4CAF50;
-            transform-origin: left bottom;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ff9800, #ff5722);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            transform: translateX(-50%);
+            transition: bottom 0.1s ease-out;
+            z-index: 2;
+        }
+
+        .crash-rocket::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10px;
+            width: 20px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ff5722, #d32f2f);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .crash-trail {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to top, rgba(255, 152, 0, 0.7), transparent);
+            z-index: 1;
         }
 
         .crash-multiplier {
@@ -640,6 +665,29 @@
         .mine-cell.diamond {
             background: #2196F3;
             color: white;
+        }
+
+        /* Новые стили для кнопок в игре Кости */
+        .dice-bet-choice {
+            background: linear-gradient(to right, #4a148c, #7b1fa2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            font-weight: bold;
+        }
+
+        .dice-bet-choice:hover {
+            background: linear-gradient(to right, #7b1fa2, #9c27b0);
+            border-color: #ffd700;
+        }
+
+        .dice-bet-choice.active {
+            background: linear-gradient(to right, #9c27b0, #ba68c8);
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
         .history {
@@ -731,7 +779,7 @@
             
             .plinko-board {
                 width: 90%;
-                height: 300px;
+                height: 400px;
             }
         }
 
@@ -769,6 +817,15 @@
                 height: 60px;
                 font-size: 18px;
             }
+            
+            .crash-multiplier {
+                font-size: 36px;
+            }
+            
+            .dice-bet-choice {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -783,7 +840,7 @@
             <div class="balance">$<span id="balance">1000</span></div>
             <button class="reset-balance" id="reset-balance">Сбросить</button>
         </div>
-    </div>
+</div>
 
     <div class="container">
         <div class="sidebar">
@@ -791,10 +848,10 @@
                 <li><a href="#" class="active" data-section="main"><i class="fas fa-home"></i> Главная</a></li>
                 <li><a href="#" data-section="slots"><i class="fas fa-dice"></i> Слоты</a></li>
                 <li><a href="#" data-section="roulette"><i class="fas fa-circle"></i> Рулетка</a></li>
-                <li><a href="#" data-section="blackjack"><i class="fas fa-club"></i> Блэкджек</a></li>
+                <li><a href="#" data-section="blackjack"><i class="fas fa-id-card"></i> Блэкджек</a></li>
                 <li><a href="#" data-section="dice"><i class="fas fa-dice-six"></i> Кости</a></li>
                 <li><a href="#" data-section="plinko"><i class="fas fa-bullseye"></i> Плинко</a></li>
-                <li><a href="#" data-section="crash"><i class="fas fa-chart-line"></i> Краш</a></li>
+                <li><a href="#" data-section="crash"><i class="fas fa-rocket"></i> Краш</a></li>
                 <li><a href="#" data-section="mines"><i class="fas fa-bomb"></i> Мины</a></li>
             </ul>
         </div>
@@ -833,7 +890,7 @@
                     
                     <div class="game-card" data-section="blackjack">
                         <div class="game-card-header">
-                            <h3 class="game-card-title"><i class="fas fa-club"></i> Блэкджек</h3>
+                            <h3 class="game-card-title"><i class="fas fa-id-card"></i> Блэкджек</h3>
                         </div>
                         <div class="game-card-body">
                             <p class="game-card-desc">Наберите 21 очко или ближе к этому числу, чем дилер, но не переборщите!</p>
@@ -863,10 +920,10 @@
                     
                     <div class="game-card" data-section="crash">
                         <div class="game-card-header">
-                            <h3 class="game-card-title"><i class="fas fa-chart-line"></i> Краш</h3>
+                            <h3 class="game-card-title"><i class="fas fa-rocket"></i> Краш</h3>
                         </div>
                         <div class="game-card-body">
-                            <p class="game-card-desc">Делайте ставки и следите за растущим множителем. Успевайте забрать выигрыш до краша!</p>
+                            <p class="game-card-desc">Делайте ставки и следите за взлетающей ракетой. Успевайте забрать выигрыш до взрыва!</p>
                             <button class="play-btn">Играть</button>
                         </div>
                     </div>
@@ -968,7 +1025,7 @@
 
             <!-- Блэкджек -->
             <div class="game-section" id="blackjack-section">
-                <h2 class="section-title"><i class="fas fa-club"></i> Блэкджек</h2>
+                <h2 class="section-title"><i class="fas fa-id-card"></i> Блэкджек</h2>
                 <div class="game-area">
                     <div class="game-controls">
                         <div class="bet-controls">
@@ -1026,11 +1083,11 @@
                     <div style="text-align: center; margin: 40px 0;">
                         <h3 style="color:#ffd700; margin-bottom: 20px;">Ваш выбор:</h3>
                         <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                            <button class="roulette-bet dice-bet-choice" data-choice="high">Больше 3.5</button>
-                            <button class="roulette-bet dice-bet-choice" data-choice="low">Меньше 3.5</button>
-                            <button class="roulette-bet dice-bet-choice" data-choice="even">Четное</button>
-                            <button class="roulette-bet dice-bet-choice" data-choice="odd">Нечетное</button>
-                            <button class="roulette-bet dice-bet-choice" data-choice="7">Ровно 7</button>
+                            <button class="dice-bet-choice" data-choice="high">Больше 3.5</button>
+                            <button class="dice-bet-choice" data-choice="low">Меньше 3.5</button>
+                            <button class="dice-bet-choice" data-choice="even">Четное</button>
+                            <button class="dice-bet-choice" data-choice="odd">Нечетное</button>
+                            <button class="dice-bet-choice" data-choice="7">Ровно 7</button>
                         </div>
                         <div style="margin-top: 20px;">Выбранная ставка: <span id="selected-dice-bet">Не выбрана</span></div>
                     </div>
@@ -1104,7 +1161,7 @@
 
             <!-- Краш -->
             <div class="game-section" id="crash-section">
-                <h2 class="section-title"><i class="fas fa-chart-line"></i> Краш</h2>
+                <h2 class="section-title"><i class="fas fa-rocket"></i> Краш</h2>
                 <div class="game-area">
                     <div class="game-controls">
                         <div class="bet-controls">
@@ -1118,8 +1175,9 @@
                     </div>
                     
                     <div class="crash-game">
-                        <div class="crash-graph" id="crash-graph">
-                            <div class="crash-line" id="crash-line"></div>
+                        <div class="crash-container" id="crash-container">
+                            <div class="crash-rocket" id="crash-rocket"></div>
+                            <div class="crash-trail" id="crash-trail"></div>
                         </div>
                         <div class="crash-multiplier" id="crash-multiplier">1.00x</div>
                         <div class="crash-buttons">
@@ -1129,7 +1187,7 @@
                     </div>
                     
                     <div class="game-result" id="crash-result">
-                        Сделайте ставку и следите за множителем!
+                        Сделайте ставку и следите за ракетой!
                     </div>
                     
                     <div class="history">
@@ -1214,7 +1272,8 @@
         // Функция остановки всех активных игр
         function stopAllGames() {
             // Останавливаем все интервалы и анимации
-            // (в реальном приложении здесь нужно сохранить ссылки на все интервалы)
+            if (plinkoAnimationInterval) clearInterval(plinkoAnimationInterval);
+            if (crashInterval) clearInterval(crashInterval);
         }
         
         // Навигация по разделам
@@ -1248,6 +1307,13 @@
                     navLink.classList.add('active');
                 }
             });
+            
+            // Инициализируем игру при переходе
+            if (sectionId === 'plinko') {
+                createPlinkoBoard();
+            } else if (sectionId === 'crash') {
+                resetCrashGame();
+            }
         }
         
         // Функция для добавления записи в историю
@@ -2031,6 +2097,7 @@
         let isPlinkoDropping = false;
         let plinkoBall = null;
         let plinkoPins = [];
+        let plinkoAnimationInterval = null;
         
         // Создание доски плинко
         function createPlinkoBoard() {
@@ -2041,21 +2108,23 @@
             board.innerHTML = '';
             slotsContainer.innerHTML = '';
             
-            // Создаем штырьки
+            // Создаем штырьки в шахматном порядке
             plinkoPins = [];
-            const rows = 8;
-            const cols = 9;
-            const pinSpacingX = board.offsetWidth / cols;
-            const pinSpacingY = board.offsetHeight / rows;
+            const rows = 10;
+            const pinSpacingX = 50;
+            const pinSpacingY = 40;
             
             for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols - row % 2; col++) {
+                // В каждом ряду разное количество штырьков
+                const pinsInRow = 9 - row;
+                const startX = (board.offsetWidth - (pinsInRow * pinSpacingX)) / 2;
+                
+                for (let col = 0; col < pinsInRow; col++) {
                     const pin = document.createElement('div');
                     pin.className = 'plinko-pin';
                     
-                    const offset = row % 2 === 0 ? pinSpacingX / 2 : 0;
-                    const x = col * pinSpacingX + offset + pinSpacingX / 2;
-                    const y = row * pinSpacingY + pinSpacingY / 2;
+                    const x = startX + col * pinSpacingX + (row % 2 === 0 ? 0 : pinSpacingX / 2);
+                    const y = 40 + row * pinSpacingY;
                     
                     pin.style.left = `${x}px`;
                     pin.style.top = `${y}px`;
@@ -2112,12 +2181,11 @@
             // Анимация падения
             let ballX = board.offsetWidth / 2 - 10;
             let ballY = 10;
-            let velocityX = 0;
+            let velocityX = (Math.random() - 0.5) * 2; // Небольшой начальный разброс
             let velocityY = 0;
-            const gravity = 0.2;
-            const friction = 0.99;
+            const gravity = 0.3;
             
-            const animationInterval = setInterval(() => {
+            plinkoAnimationInterval = setInterval(() => {
                 // Применяем гравитацию
                 velocityY += gravity;
                 
@@ -2134,10 +2202,10 @@
                     if (distance < 16) { // Столкновение
                         // Отскок от штырька
                         const angle = Math.atan2(dy, dx);
-                        const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+                        const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY) * 0.7;
                         
-                        velocityX = Math.cos(angle) * speed * 0.8;
-                        velocityY = Math.sin(angle) * speed * 0.8;
+                        velocityX = Math.cos(angle) * speed;
+                        velocityY = Math.sin(angle) * speed;
                         
                         // Немного отодвигаем шарик от штырька
                         ballX = pin.x + Math.cos(angle) * 16 - 10;
@@ -2151,27 +2219,23 @@
                     ballX = ballX <= 0 ? 0 : board.offsetWidth - 20;
                 }
                 
-                // Применяем трение
-                velocityX *= friction;
-                velocityY *= friction;
-                
                 // Обновляем позицию шарика
                 plinkoBall.style.left = `${ballX}px`;
                 plinkoBall.style.top = `${ballY}px`;
                 
                 // Проверяем, достиг ли шарик низа
                 if (ballY >= board.offsetHeight - 30) {
-                    clearInterval(animationInterval);
+                    clearInterval(plinkoAnimationInterval);
                     
                     // Определяем, в какой слот попал шарик
                     const slotWidth = board.offsetWidth / 9;
-                    const slotIndex = Math.floor(ballX / slotWidth);
+                    const slotIndex = Math.min(8, Math.max(0, Math.floor(ballX / slotWidth)));
                     const slots = document.querySelectorAll('.plinko-slot');
                     
                     if (slots[slotIndex]) {
                         slots[slotIndex].classList.add('active');
                         const multiplier = parseFloat(slots[slotIndex].dataset.multiplier);
-                        const winAmount = bet * multiplier;
+                        const winAmount = Math.round(bet * multiplier);
                         
                         // Начисляем выигрыш
                         balance += winAmount;
@@ -2181,9 +2245,12 @@
                         if (winAmount > bet) {
                             document.getElementById('plinko-result').innerHTML = `<span class="win">${resultText} Вы выиграли $${winAmount - bet}!</span>`;
                             addToHistory('plinko', resultText, winAmount - bet, true);
+                        } else if (winAmount === bet) {
+                            document.getElementById('plinko-result').innerHTML = `<span>${resultText} Ваша ставка возвращена.</span>`;
+                            addToHistory('plinko', resultText, 0, false);
                         } else {
-                            document.getElementById('plinko-result').innerHTML = `<span class="loss">${resultText} Вы ${winAmount === bet ? 'вернули ставку' : `проиграли $${bet - winAmount}`}.</span>`;
-                            addToHistory('plinko', resultText, bet - winAmount, winAmount > bet);
+                            document.getElementById('plinko-result').innerHTML = `<span class="loss">${resultText} Вы проиграли $${bet - winAmount}.</span>`;
+                            addToHistory('plinko', resultText, bet - winAmount, false);
                         }
                     }
                     
@@ -2199,7 +2266,7 @@
                         document.getElementById('drop-plinko-btn').textContent = 'БРОСИТЬ ШАРИК!';
                     }, 1000);
                 }
-            }, 20);
+            }, 30);
         }
         
         // Инициализация плинко
@@ -2212,6 +2279,28 @@
         let crashInterval = null;
         let playerBet = 0;
         let hasCashedOut = false;
+        let crashStartTime = 0;
+        let rocketPosition = 0;
+        
+        // Сброс игры краш
+        function resetCrashGame() {
+            crashGameActive = false;
+            hasCashedOut = false;
+            crashMultiplier = 1.0;
+            rocketPosition = 0;
+            
+            // Сбрасываем позицию ракеты
+            const rocket = document.getElementById('crash-rocket');
+            const trail = document.getElementById('crash-trail');
+            rocket.style.bottom = '0px';
+            trail.style.height = '0%';
+            
+            // Обновляем интерфейс
+            document.getElementById('crash-multiplier').textContent = crashMultiplier.toFixed(2) + 'x';
+            document.getElementById('crash-bet-btn').style.display = 'inline-block';
+            document.getElementById('crash-cashout-btn').style.display = 'none';
+            document.getElementById('crash-result').innerHTML = 'Сделайте ставку и следите за ракетой!';
+        }
         
         // Начало игры в краш
         document.getElementById('crash-bet-btn').addEventListener('click', function() {
@@ -2232,28 +2321,35 @@
             crashGameActive = true;
             hasCashedOut = false;
             crashMultiplier = 1.0;
+            crashStartTime = Date.now();
+            rocketPosition = 0;
             
             // Обновляем интерфейс
             document.getElementById('crash-multiplier').textContent = crashMultiplier.toFixed(2) + 'x';
             document.getElementById('crash-bet-btn').style.display = 'none';
             document.getElementById('crash-cashout-btn').style.display = 'inline-block';
-            document.getElementById('crash-result').innerHTML = 'Игра началась! Следите за множителем...';
-            
-            // Сбрасываем график
-            const crashLine = document.getElementById('crash-line');
-            crashLine.style.transform = 'scaleX(0)';
+            document.getElementById('crash-result').innerHTML = 'Игра началась! Следите за ракетой...';
             
             // Запускаем игру
             crashInterval = setInterval(() => {
-                // Увеличиваем множитель
-                crashMultiplier += 0.01 + Math.random() * 0.02;
+                const elapsedTime = (Date.now() - crashStartTime) / 1000;
+                
+                // Гиперболический рост множителя (медленно в начале, быстро в конце)
+                crashMultiplier = 1 + Math.pow(elapsedTime, 2) / 10;
+                
+                // Позиция ракеты (соответствует множителю)
+                const containerHeight = document.getElementById('crash-container').offsetHeight;
+                rocketPosition = Math.min(containerHeight - 60, (crashMultiplier - 1) * 30);
                 
                 // Обновляем отображение
                 document.getElementById('crash-multiplier').textContent = crashMultiplier.toFixed(2) + 'x';
-                crashLine.style.transform = `scaleX(${crashMultiplier / 10})`;
+                const rocket = document.getElementById('crash-rocket');
+                const trail = document.getElementById('crash-trail');
+                rocket.style.bottom = `${rocketPosition}px`;
+                trail.style.height = `${(rocketPosition / containerHeight) * 100}%`;
                 
-                // Проверяем краш (случайное событие с вероятностью, зависящей от множителя)
-                const crashProbability = 0.01 + (crashMultiplier - 1) * 0.005;
+                // Проверяем краш (вероятность увеличивается со временем)
+                const crashProbability = 0.005 + (elapsedTime * 0.002);
                 if (Math.random() < crashProbability && crashMultiplier > 1.1) {
                     endCrashGame();
                 }
@@ -2287,7 +2383,7 @@
             
             if (!hasCashedOut) {
                 // Игрок не успел забрать выигрыш
-                const resultText = `Краш на множителе ${crashMultiplier.toFixed(2)}x`;
+                const resultText = `Ракета взорвалась на множителе ${crashMultiplier.toFixed(2)}x`;
                 document.getElementById('crash-result').innerHTML = `<span class="loss">${resultText} Вы проиграли $${playerBet}.</span>`;
                 addToHistory('crash', resultText, playerBet, false);
             }
@@ -2296,12 +2392,23 @@
             document.getElementById('crash-bet-btn').style.display = 'inline-block';
             document.getElementById('crash-cashout-btn').style.display = 'none';
             
-            // Ждем 2 секунды перед сбросом множителя
-            setTimeout(() => {
-                document.getElementById('crash-multiplier').textContent = '1.00x';
-                const crashLine = document.getElementById('crash-line');
-                crashLine.style.transform = 'scaleX(0)';
-            }, 2000);
+            // Анимация взрыва ракеты
+            if (!hasCashedOut) {
+                const rocket = document.getElementById('crash-rocket');
+                rocket.style.background = 'linear-gradient(to bottom, #ff5722, #d32f2f)';
+                rocket.style.boxShadow = '0 0 20px #ff5722';
+                
+                setTimeout(() => {
+                    rocket.style.background = 'linear-gradient(to bottom, #ff9800, #ff5722)';
+                    rocket.style.boxShadow = 'none';
+                    rocket.style.bottom = '0px';
+                    
+                    const trail = document.getElementById('crash-trail');
+                    trail.style.height = '0%';
+                    
+                    document.getElementById('crash-multiplier').textContent = '1.00x';
+                }, 1000);
+            }
         }
         
         // ========== МИНЫ ==========
@@ -2519,6 +2626,13 @@
             // Добавляем активный класс первой кнопке ставок в каждой игре
             document.querySelectorAll('.bet-controls .bet-btn:first-child').forEach(btn => {
                 btn.classList.add('active');
+            });
+            
+            // Добавляем активный класс первой кнопке выбора ставки в костях
+            document.querySelectorAll('.dice-bet-choice:first-child').forEach(btn => {
+                btn.classList.add('active');
+                selectedDiceBet = btn.dataset.choice;
+                document.getElementById('selected-dice-bet').textContent = btn.textContent;
             });
         };
     </script>

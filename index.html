@@ -492,23 +492,22 @@
 
         .plinko-pin {
             position: absolute;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
             border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             z-index: 5;
         }
 
         .plinko-ball {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background: radial-gradient(circle at 30% 30%, #ff416c, #c2185b);
             border-radius: 50%;
             z-index: 10;
-            transition: all 0.05s linear;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .plinko-slots-container {
@@ -537,7 +536,7 @@
 
         .plinko-slot.active {
             background: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .crash-game {
@@ -547,7 +546,7 @@
 
         .crash-container {
             width: 100%;
-            height: 400px;
+            height: 300px;
             background: rgba(0, 0, 0, 0.3);
             border: 3px solid #ffd700;
             border-radius: 10px;
@@ -561,44 +560,26 @@
 
         .crash-rocket {
             position: absolute;
-            bottom: 0;
+            bottom: 10px;
             left: 50%;
             width: 40px;
             height: 60px;
-            background: linear-gradient(to bottom, #ff9800, #ff5722);
+            background: linear-gradient(to bottom, #2196F3, #0D47A1);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%);
             z-index: 20;
-            transition: transform 0.1s ease-out;
+            transition: bottom 0.05s linear;
         }
 
-        .crash-rocket::after {
+        .crash-rocket::before {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 10px;
-            width: 20px;
-            height: 40px;
-            background: linear-gradient(to bottom, #ff5722, #d32f2f);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-
-        .crash-flame {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            width: 30px;
-            height: 50px;
-            background: linear-gradient(to bottom, #ff9800, transparent);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            animation: flame 0.5s infinite alternate;
-            z-index: 15;
-        }
-
-        @keyframes flame {
-            0% { height: 40px; opacity: 0.8; }
-            100% { height: 60px; opacity: 1; }
+            top: -10px;
+            left: 15px;
+            width: 10px;
+            height: 15px;
+            background: #FF9800;
+            border-radius: 3px;
         }
 
         .crash-multiplier {
@@ -608,6 +589,7 @@
             margin: 20px 0;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             height: 60px;
+            transition: all 0.1s ease-out;
         }
 
         .crash-buttons {
@@ -710,7 +692,7 @@
         .dice-bet-choice.active {
             background: linear-gradient(to right, #9c27b0, #ba68c8);
             border-color: #ffd700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .history {
@@ -844,7 +826,7 @@
             }
             
             .crash-container {
-                height: 300px;
+                height: 250px;
             }
         }
     </style>
@@ -877,7 +859,7 @@
         </div>
 
         <div class="main-content">
-            <!-- Главная страница и другие игры остаются без изменений -->
+            <!-- Главная страница -->
             <div class="game-section active" id="main-section">
                 <h2 class="section-title"><i class="fas fa-gem"></i> Добро пожаловать в Casino Royale!</h2>
                 <div class="warning">
@@ -961,8 +943,6 @@
                 </div>
             </div>
 
-            <!-- Слот-машина, Рулетка, Блэкджек, Кости остаются без изменений -->
-
             <!-- Плинко -->
             <div class="game-section" id="plinko-section">
                 <h2 class="section-title"><i class="fas fa-bullseye"></i> Плинко</h2>
@@ -1018,7 +998,6 @@
                     <div class="crash-game">
                         <div class="crash-container" id="crash-container">
                             <div class="crash-rocket" id="crash-rocket"></div>
-                            <div class="crash-flame" id="crash-flame"></div>
                         </div>
                         <div class="crash-multiplier" id="crash-multiplier">1.00x</div>
                         <div class="crash-buttons">
@@ -1034,44 +1013,6 @@
                     <div class="history">
                         <h3>История игр</h3>
                         <div class="history-list" id="crash-history"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Мины и другие игры остаются без изменений -->
-            <div class="game-section" id="mines-section">
-                <h2 class="section-title"><i class="fas fa-bomb"></i> Мины</h2>
-                <div class="game-area">
-                    <div class="game-controls">
-                        <div class="bet-controls">
-                            <button class="bet-btn" data-bet="10">$10</button>
-                            <button class="bet-btn" data-bet="50">$50</button>
-                            <button class="bet-btn" data-bet="100">$100</button>
-                            <input type="number" class="bet-input" id="mines-bet" value="50" min="10" max="1000">
-                            <div>Текущая ставка: $<span id="current-mines-bet">50</span></div>
-                        </div>
-                        <button class="spin-btn" id="start-mines-btn">НАЧАТЬ ИГРУ</button>
-                        <button class="bet-btn" id="cashout-mines-btn" style="display: none;">ЗАБРАТЬ ВЫИГРЫШ</button>
-                    </div>
-                    
-                    <div class="mines-game">
-                        <div style="text-align: center; margin-bottom: 20px;">
-                            <div>Мин: <span id="mines-count">5</span> | Алмазов: <span id="diamonds-count">20</span></div>
-                            <div>Найдено алмазов: <span id="found-diamonds">0</span></div>
-                            <div>Текущий множитель: <span id="mines-multiplier">1.00x</span></div>
-                        </div>
-                        <div class="mines-grid" id="mines-grid">
-                            <!-- Ячейки мин будут созданы через JS -->
-                        </div>
-                    </div>
-                    
-                    <div class="game-result" id="mines-result">
-                        Выберите количество мин и сделайте ставку!
-                    </div>
-                    
-                    <div class="history">
-                        <h3>История игр</h3>
-                        <div class="history-list" id="mines-history"></div>
                     </div>
                 </div>
             </div>
@@ -1115,6 +1056,7 @@
             // Останавливаем все интервалы и анимации
             if (plinkoAnimationInterval) clearInterval(plinkoAnimationInterval);
             if (crashInterval) clearInterval(crashInterval);
+            if (crashAnimationFrame) cancelAnimationFrame(crashAnimationFrame);
         }
         
         // Навигация по разделам
@@ -1246,7 +1188,7 @@
         let plinkoPins = [];
         let plinkoAnimationInterval = null;
         
-        // Создание доски плинко
+        // Создание доски плинко с правильной физикой
         function createPlinkoBoard() {
             const board = document.getElementById('plinko-board');
             const slotsContainer = document.getElementById('plinko-slots');
@@ -1257,11 +1199,11 @@
             
             // Создаем штырьки в классическом треугольном расположении
             plinkoPins = [];
-            const rows = 12;
+            const rows = 10;
             const boardWidth = board.offsetWidth;
             const boardHeight = board.offsetHeight;
-            const pinSpacingX = 50;
-            const pinSpacingY = 40;
+            const pinSpacingX = 60;
+            const pinSpacingY = 45;
             
             // Центрируем штырьки
             const startX = (boardWidth - (rows * pinSpacingX)) / 2;
@@ -1281,11 +1223,16 @@
                     pin.style.top = `${y}px`;
                     
                     board.appendChild(pin);
-                    plinkoPins.push({ x, y, element: pin });
+                    plinkoPins.push({ 
+                        x: x + 7, // Центр штырька
+                        y: y + 7, // Центр штырька
+                        radius: 7,
+                        element: pin 
+                    });
                 }
             }
             
-            // Создаем слоты (более компактно)
+            // Создаем слоты
             const slotMultipliers = [10, 5, 2, 1, 0.5, 1, 2, 5, 10];
             for (let i = 0; i < 9; i++) {
                 const slot = document.createElement('div');
@@ -1297,7 +1244,7 @@
             }
         }
         
-        // Анимация падения шарика с улучшенной физикой
+        // Анимация падения шарика с реалистичной физикой
         function dropPlinkoBall() {
             if (isPlinkoDropping) return;
             
@@ -1320,7 +1267,7 @@
             const board = document.getElementById('plinko-board');
             plinkoBall = document.createElement('div');
             plinkoBall.className = 'plinko-ball';
-            const startX = board.offsetWidth / 2 - 12;
+            const startX = board.offsetWidth / 2 - 10;
             plinkoBall.style.left = `${startX}px`;
             plinkoBall.style.top = '20px';
             board.appendChild(plinkoBall);
@@ -1333,10 +1280,11 @@
             // Анимация падения
             let ballX = startX;
             let ballY = 20;
-            let velocityX = (Math.random() - 0.5) * 1.5; // Небольшой начальный разброс
+            let velocityX = (Math.random() - 0.5) * 1.2; // Небольшой начальный разброс
             let velocityY = 0;
-            const gravity = 0.15;
-            const damping = 0.8;
+            const gravity = 0.2;
+            const damping = 0.85;
+            const ballRadius = 10;
             
             plinkoAnimationInterval = setInterval(() => {
                 // Применяем гравитацию
@@ -1348,31 +1296,41 @@
                 
                 // Проверяем столкновение со штырьками
                 for (const pin of plinkoPins) {
-                    const dx = (ballX + 12) - pin.x;
-                    const dy = (ballY + 12) - pin.y;
+                    const dx = (ballX + ballRadius) - pin.x;
+                    const dy = (ballY + ballRadius) - pin.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    if (distance < 20) { // Столкновение (радиус штырька + радиус шарика)
-                        // Отскок от штырька с реалистичной физикой
-                        const angle = Math.atan2(dy, dx);
-                        const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+                    if (distance < (ballRadius + pin.radius)) { // Столкновение
+                        // Нормализуем вектор
+                        const nx = dx / distance;
+                        const ny = dy / distance;
                         
-                        // Сохраняем часть энергии при отскоке
-                        const bounceFactor = 0.7;
-                        velocityX = Math.cos(angle + Math.PI) * speed * bounceFactor + (Math.random() - 0.5) * 0.5;
-                        velocityY = Math.sin(angle + Math.PI) * speed * bounceFactor + (Math.random() - 0.5) * 0.5;
+                        // Проекция скорости на нормаль
+                        const dotProduct = velocityX * nx + velocityY * ny;
+                        
+                        // Отражение скорости
+                        velocityX = velocityX - 2 * dotProduct * nx;
+                        velocityY = velocityY - 2 * dotProduct * ny;
+                        
+                        // Уменьшаем энергию
+                        velocityX *= damping;
+                        velocityY *= damping;
+                        
+                        // Добавляем немного случайности для реалистичности
+                        velocityX += (Math.random() - 0.5) * 0.3;
+                        velocityY += (Math.random() - 0.5) * 0.3;
                         
                         // Отодвигаем шарик от штырька
-                        const overlap = 20 - distance;
-                        ballX += Math.cos(angle) * overlap;
-                        ballY += Math.sin(angle) * overlap;
+                        const overlap = (ballRadius + pin.radius) - distance;
+                        ballX += nx * overlap;
+                        ballY += ny * overlap;
                     }
                 }
                 
                 // Проверяем столкновение со стенами
-                if (ballX <= 0 || ballX >= board.offsetWidth - 24) {
+                if (ballX <= 0 || ballX >= board.offsetWidth - 20) {
                     velocityX = -velocityX * damping;
-                    ballX = ballX <= 0 ? 0 : board.offsetWidth - 24;
+                    ballX = ballX <= 0 ? 0 : board.offsetWidth - 20;
                 }
                 
                 // Обновляем позицию шарика
@@ -1386,7 +1344,7 @@
                     // Определяем, в какой слот попал шарик
                     const slotsContainer = document.querySelector('.plinko-slots-container');
                     const slotWidth = slotsContainer.offsetWidth / 9;
-                    const slotIndex = Math.min(8, Math.max(0, Math.floor(ballX / slotWidth)));
+                    const slotIndex = Math.min(8, Math.max(0, Math.floor((ballX + 10) / slotWidth)));
                     const slots = document.querySelectorAll('.plinko-slot');
                     
                     if (slots[slotIndex]) {
@@ -1423,7 +1381,7 @@
                         document.getElementById('drop-plinko-btn').textContent = 'БРОСИТЬ ШАРИК!';
                     }, 1000);
                 }
-            }, 20);
+            }, 16); // ~60 FPS
         }
         
         // Инициализация плинко
@@ -1437,26 +1395,29 @@
         let playerBet = 0;
         let hasCashedOut = false;
         let crashStartTime = 0;
-        let crashPhase = 0; // 0 = медленная фаза, 1 = ускоренная фаза
+        let crashAnimationFrame = null;
         
         // Сброс игры краш
         function resetCrashGame() {
             crashGameActive = false;
             hasCashedOut = false;
             crashMultiplier = 1.0;
-            crashPhase = 0;
             
             // Сбрасываем позицию ракеты
             const rocket = document.getElementById('crash-rocket');
-            const flame = document.getElementById('crash-flame');
-            rocket.style.transform = 'translateX(-50%) translateY(0)';
-            flame.style.display = 'block';
+            rocket.style.bottom = '10px';
             
             // Обновляем интерфейс
             document.getElementById('crash-multiplier').textContent = crashMultiplier.toFixed(2) + 'x';
             document.getElementById('crash-bet-btn').style.display = 'inline-block';
             document.getElementById('crash-cashout-btn').style.display = 'none';
             document.getElementById('crash-result').innerHTML = 'Сделайте ставку и следите за ракетой!';
+            
+            // Отменяем анимацию
+            if (crashAnimationFrame) {
+                cancelAnimationFrame(crashAnimationFrame);
+                crashAnimationFrame = null;
+            }
         }
         
         // Начало игры в краш
@@ -1479,7 +1440,6 @@
             hasCashedOut = false;
             crashMultiplier = 1.0;
             crashStartTime = Date.now();
-            crashPhase = 0;
             
             // Обновляем интерфейс
             document.getElementById('crash-multiplier').textContent = crashMultiplier.toFixed(2) + 'x';
@@ -1487,60 +1447,71 @@
             document.getElementById('crash-cashout-btn').style.display = 'inline-block';
             document.getElementById('crash-result').innerHTML = 'Игра началась! Следите за ракетой...';
             
-            // Запускаем игру
-            crashInterval = setInterval(() => {
+            // Запускаем плавную анимацию
+            function animateCrash() {
+                if (!crashGameActive) return;
+                
                 const elapsedTime = (Date.now() - crashStartTime) / 1000;
                 
-                // Параболический рост множителя
-                // До 1.3x - медленная фаза (квадратичная парабола с малым коэффициентом)
-                // После 1.3x - ускоренная фаза (кубическая парабола)
+                // Плавный рост множителя с ускорением
+                // Формула: multiplier = 1 + a*t^b, где t - время, a и b - коэффициенты
+                // Медленный рост в начале, затем ускорение
                 
-                if (crashMultiplier < 1.3) {
-                    // Медленная фаза: парабола y = 1 + 0.01 * t^2
-                    crashMultiplier = 1 + 0.01 * Math.pow(elapsedTime, 1.5);
-                    crashPhase = 0;
-                } else {
-                    // Ускоренная фаза: парабола y = 1.3 + 0.05 * (t - t0)^2
-                    // Где t0 - время достижения 1.3x
-                    const t0 = Math.sqrt(0.3 / 0.01); // Решение уравнения 1 + 0.01 * t0^2 = 1.3
-                    crashMultiplier = 1.3 + 0.05 * Math.pow(elapsedTime - t0, 2);
-                    crashPhase = 1;
+                // Медленный рост до ~1.5x
+                if (elapsedTime < 3) {
+                    crashMultiplier = 1 + 0.05 * Math.pow(elapsedTime, 1.3);
+                } 
+                // Средний рост до ~3x
+                else if (elapsedTime < 6) {
+                    crashMultiplier = 1.5 + 0.1 * Math.pow(elapsedTime - 3, 1.5);
+                }
+                // Быстрый рост после 3x
+                else {
+                    crashMultiplier = 3 + 0.2 * Math.pow(elapsedTime - 6, 1.8);
                 }
                 
-                // Параболическая траектория ракеты
+                // Позиция ракеты пропорциональна множителю
                 const containerHeight = document.getElementById('crash-container').offsetHeight;
-                let rocketHeight;
+                const maxHeight = containerHeight - 70;
+                const rocketHeight = Math.min(maxHeight, (crashMultiplier - 1) * 100);
                 
-                if (crashPhase === 0) {
-                    // Медленный подъем в начале
-                    rocketHeight = Math.min(containerHeight - 60, 100 * Math.pow(elapsedTime, 1.2));
-                } else {
-                    // Быстрый подъем после 1.3x
-                    const t0 = Math.sqrt(0.3 / 0.01);
-                    rocketHeight = Math.min(containerHeight - 60, 100 + 200 * Math.pow(elapsedTime - t0, 1.5));
-                }
-                
-                // Обновляем отображение
+                // Плавное обновление отображения
                 document.getElementById('crash-multiplier').textContent = crashMultiplier.toFixed(2) + 'x';
                 const rocket = document.getElementById('crash-rocket');
-                rocket.style.transform = `translateX(-50%) translateY(-${rocketHeight}px)`;
+                rocket.style.bottom = `${10 + rocketHeight}px`;
+                
+                // Плавное изменение цвета множителя
+                const multiplierElement = document.getElementById('crash-multiplier');
+                if (crashMultiplier > 2) {
+                    const intensity = Math.min(1, (crashMultiplier - 2) / 3);
+                    multiplierElement.style.color = `rgb(${255}, ${255 - intensity * 100}, ${255 - intensity * 200})`;
+                }
                 
                 // Проверяем краш (вероятность увеличивается с множителем)
                 let crashProbability;
                 if (crashMultiplier < 1.5) {
-                    crashProbability = 0.001;
+                    crashProbability = 0.0005;
                 } else if (crashMultiplier < 2) {
-                    crashProbability = 0.003;
+                    crashProbability = 0.001;
                 } else if (crashMultiplier < 3) {
-                    crashProbability = 0.005;
+                    crashProbability = 0.002;
+                } else if (crashMultiplier < 5) {
+                    crashProbability = 0.003;
                 } else {
-                    crashProbability = 0.01;
+                    crashProbability = 0.005;
                 }
                 
+                // Случайное событие краша
                 if (Math.random() < crashProbability && crashMultiplier > 1.1) {
                     endCrashGame();
+                } else {
+                    // Продолжаем анимацию
+                    crashAnimationFrame = requestAnimationFrame(animateCrash);
                 }
-            }, 50);
+            }
+            
+            // Запускаем анимацию
+            crashAnimationFrame = requestAnimationFrame(animateCrash);
         });
         
         // Забрать выигрыш в краш
@@ -1565,7 +1536,6 @@
         function endCrashGame() {
             if (!crashGameActive) return;
             
-            clearInterval(crashInterval);
             crashGameActive = false;
             
             if (!hasCashedOut) {
@@ -1576,47 +1546,35 @@
                 
                 // Анимация взрыва
                 const rocket = document.getElementById('crash-rocket');
-                const flame = document.getElementById('crash-flame');
-                rocket.style.background = 'linear-gradient(to bottom, #ff5722, #d32f2f)';
-                rocket.style.boxShadow = '0 0 20px #ff5722';
-                flame.style.display = 'none';
-                
-                // Создаем частицы взрыва
                 const container = document.getElementById('crash-container');
-                for (let i = 0; i < 15; i++) {
-                    const particle = document.createElement('div');
-                    particle.style.position = 'absolute';
-                    particle.style.width = '10px';
-                    particle.style.height = '10px';
-                    particle.style.background = ['#ff9800', '#ff5722', '#d32f2f'][Math.floor(Math.random() * 3)];
-                    particle.style.borderRadius = '50%';
-                    particle.style.left = '50%';
-                    particle.style.top = rocket.style.transform.match(/translateY\(-(\d+)px\)/)[1] + 'px';
-                    particle.style.transform = 'translate(-50%, -50%)';
-                    container.appendChild(particle);
-                    
-                    // Анимация разлета частиц
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = 5 + Math.random() * 10;
-                    let x = 0, y = 0;
-                    const particleInterval = setInterval(() => {
-                        x += Math.cos(angle) * speed;
-                        y += Math.sin(angle) * speed;
-                        particle.style.left = `calc(50% + ${x}px)`;
-                        particle.style.top = `calc(${rocket.style.transform.match(/translateY\(-(\d+)px\)/)[1]}px + ${y}px)`;
-                        particle.style.opacity = 1 - (Math.abs(x) + Math.abs(y)) / 100;
-                        
-                        if (Math.abs(x) > 100 || Math.abs(y) > 100) {
-                            clearInterval(particleInterval);
-                            particle.remove();
-                        }
-                    }, 30);
-                }
+                
+                // Меняем цвет ракеты на красный
+                rocket.style.background = 'linear-gradient(to bottom, #ff5722, #d32f2f)';
+                
+                // Создаем эффект взрыва
+                setTimeout(() => {
+                    rocket.style.opacity = '0.5';
+                    setTimeout(() => {
+                        rocket.style.opacity = '1';
+                        setTimeout(() => {
+                            rocket.style.opacity = '0.3';
+                            setTimeout(() => {
+                                rocket.style.opacity = '0';
+                            }, 100);
+                        }, 100);
+                    }, 100);
+                }, 100);
             }
             
             // Обновляем интерфейс
             document.getElementById('crash-bet-btn').style.display = 'inline-block';
             document.getElementById('crash-cashout-btn').style.display = 'none';
+            
+            // Отменяем анимацию
+            if (crashAnimationFrame) {
+                cancelAnimationFrame(crashAnimationFrame);
+                crashAnimationFrame = null;
+            }
             
             // Ждем 2 секунды перед сбросом
             setTimeout(() => {
@@ -1629,13 +1587,8 @@
             updateBalance();
             
             // Инициализация всех игр
-            setupBetControls('slot');
-            setupBetControls('roulette');
-            setupBetControls('blackjack');
-            setupBetControls('dice');
             setupBetControls('plinko');
             setupBetControls('crash');
-            setupBetControls('mines');
             
             // Создаем плинко доску при загрузке
             createPlinkoBoard();
@@ -1643,14 +1596,6 @@
             // Добавляем активный класс первой кнопке ставок в каждой игре
             document.querySelectorAll('.bet-controls .bet-btn:first-child').forEach(btn => {
                 btn.classList.add('active');
-            });
-            
-            // Добавляем активный класс первой кнопке выбора ставки в костях
-            document.querySelectorAll('.dice-bet-choice:first-child').forEach(btn => {
-                btn.classList.add('active');
-                if (btn.dataset.choice) {
-                    document.getElementById('selected-dice-bet').textContent = btn.textContent;
-                }
             });
         };
     </script>

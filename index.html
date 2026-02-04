@@ -2,22 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- ИЗМЕНЕНИЕ 1: Улучшен viewport для мобильных -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Casino Royale - Игровой портал</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        <!-- ИЗМЕНЕНИЕ 2: Добавлены глобальные улучшения для мобильных -->
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе */
-            -webkit-text-size-adjust: 100%; /* Предотвращает авто-масштаб текста в iOS */
+            -webkit-tap-highlight-color: transparent;
+            -webkit-text-size-adjust: 100%;
         }
 
-        <!-- ИЗМЕНЕНИЕ 3: Предотвращение горизонтальной прокрутки -->
         html {
             overflow-x: hidden;
         }
@@ -28,8 +25,8 @@
             min-height: 100vh;
             overflow-x: hidden;
             padding-top: 60px;
-            touch-action: pan-y; /* Предотвращает нежелательный зум */
-            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         .header {
@@ -59,7 +56,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            overflow-wrap: break-word;
             word-wrap: break-word;
         }
 
@@ -82,7 +79,7 @@
         .balance {
             font-weight: bold;
             color: #ffd700;
-            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            overflow-wrap: break-word;
             word-wrap: break-word;
         }
 
@@ -259,7 +256,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            overflow-wrap: break-word;
             word-wrap: break-word;
         }
 
@@ -307,7 +304,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            overflow-wrap: break-word;
             word-wrap: break-word;
         }
 
@@ -320,7 +317,7 @@
             line-height: 1.5;
             margin-bottom: 15px;
             font-size: 14px;
-            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            overflow-wrap: break-word;
             word-wrap: break-word;
         }
 
@@ -357,7 +354,7 @@
             flex-direction: column;
             gap: 15px;
             margin-bottom: 20px;
-            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            max-width: 100%;
         }
 
         .bet-controls {
@@ -365,7 +362,7 @@
             flex-wrap: wrap;
             gap: 10px;
             align-items: center;
-            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            max-width: 100%;
         }
 
         .bet-btn {
@@ -407,7 +404,7 @@
             color: #fff;
             padding: 8px 12px;
             border-radius: 10px;
-            font-size: 16px; /* ИЗМЕНЕНИЕ: фиксированный размер для iOS */
+            font-size: 16px;
             width: 120px;
             max-width: 100%;
         }
@@ -459,13 +456,14 @@
             overflow: hidden;
         }
 
-        /* ПЛИНКО с трубой */
+        /* ПЛИНКО с трубой - ИСПРАВЛЕННАЯ ВЕРСИЯ */
         .plinko-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin: 20px 0;
             width: 100%;
+            position: relative;
         }
 
         .plinko-board {
@@ -500,14 +498,15 @@
             transform: translate(-50%, -50%);
         }
 
+        /* ИСПРАВЛЕНИЕ: Увеличен размер шаров и улучшено позиционирование */
         .plinko-ball {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 24px; /* Увеличен размер для мобильных */
+            height: 24px;
             background: radial-gradient(circle at 30% 30%, #ff416c, #c2185b);
             border-radius: 50%;
             z-index: 10;
-            box-shadow: 0 0 10px rgba(255, 65, 108, 0.7);
+            box-shadow: 0 0 12px rgba(255, 65, 108, 0.7);
             transform: translate(-50%, -50%);
             transition: transform 0.05s linear;
         }
@@ -622,15 +621,15 @@
         }
 
         /* НОВЫЕ КОЭФФИЦИЕНТЫ для Плинко: 10x | 3x | 1x | 0.5x | 0x | 0.5x | 1x | 3x | 10x */
-        .slot-0 { border-color: #9C27B0; background: linear-gradient(to bottom, #7B1FA2, #9C27B0); } /* 10x - фиолетовый */
-        .slot-1 { border-color: #2196F3; background: linear-gradient(to bottom, #0D47A1, #2196F3); } /* 3x - синий */
-        .slot-2 { border-color: #4CAF50; background: linear-gradient(to bottom, #2E7D32, #4CAF50); } /* 1x - зеленый */
-        .slot-3 { border-color: #FF9800; background: linear-gradient(to bottom, #F57C00, #FF9800); } /* 0.5x - оранжевый */
-        .slot-4 { border-color: #616161; background: linear-gradient(to bottom, #424242, #616161); } /* 0x - серый */
-        .slot-5 { border-color: #FF9800; background: linear-gradient(to bottom, #F57C00, #FF9800); } /* 0.5x - оранжевый */
-        .slot-6 { border-color: #4CAF50; background: linear-gradient(to bottom, #2E7D32, #4CAF50); } /* 1x - зеленый */
-        .slot-7 { border-color: #2196F3; background: linear-gradient(to bottom, #0D47A1, #2196F3); } /* 3x - синий */
-        .slot-8 { border-color: #9C27B0; background: linear-gradient(to bottom, #7B1FA2, #9C27B0); } /* 10x - фиолетовый */
+        .slot-0 { border-color: #9C27B0; background: linear-gradient(to bottom, #7B1FA2, #9C27B0); }
+        .slot-1 { border-color: #2196F3; background: linear-gradient(to bottom, #0D47A1, #2196F3); }
+        .slot-2 { border-color: #4CAF50; background: linear-gradient(to bottom, #2E7D32, #4CAF50); }
+        .slot-3 { border-color: #FF9800; background: linear-gradient(to bottom, #F57C00, #FF9800); }
+        .slot-4 { border-color: #616161; background: linear-gradient(to bottom, #424242, #616161); }
+        .slot-5 { border-color: #FF9800; background: linear-gradient(to bottom, #F57C00, #FF9800); }
+        .slot-6 { border-color: #4CAF50; background: linear-gradient(to bottom, #2E7D32, #4CAF50); }
+        .slot-7 { border-color: #2196F3; background: linear-gradient(to bottom, #0D47A1, #2196F3); }
+        .slot-8 { border-color: #9C27B0; background: linear-gradient(to bottom, #7B1FA2, #9C27B0); }
 
         /* Управление Плинко */
         .plinko-multi-control {
@@ -640,7 +639,7 @@
             margin: 20px 0;
             justify-content: center;
             flex-wrap: wrap;
-            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            max-width: 100%;
         }
 
         .ball-count-control {
@@ -917,7 +916,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
-            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            max-width: 100%;
         }
 
         .crash-btn {
@@ -1160,7 +1159,7 @@
             }
         }
 
-        <!-- ИЗМЕНЕНИЕ 4: Дополнительные медиа-запросы для мобильных -->
+        /* Дополнительные медиа-запросы для улучшения мобильного опыта */
         @media (max-width: 767px) {
             .header {
                 padding: 10px 15px;
@@ -1217,8 +1216,19 @@
                 font-size: 35px;
             }
             
+            /* ИСПРАВЛЕНИЕ ДЛЯ ПЛИНКО НА МОБИЛЬНЫХ */
             .plinko-board {
                 height: 400px !important;
+            }
+            
+            .plinko-ball {
+                width: 28px; /* Еще больше для мобильных */
+                height: 28px;
+            }
+            
+            .plinko-pin {
+                width: 10px;
+                height: 10px;
             }
             
             .plinko-slots-container {
@@ -1283,7 +1293,7 @@
             
             .bet-input {
                 width: 90px;
-                font-size: 16px !important; /* ИЗМЕНЕНИЕ: фиксированный для iOS */
+                font-size: 16px !important;
                 padding: 6px 10px;
             }
             
@@ -1340,8 +1350,19 @@
                 font-size: 30px;
             }
             
+            /* ДОПОЛНИТЕЛЬНОЕ ИСПРАВЛЕНИЕ ДЛЯ ПЛИНКО */
             .plinko-board {
                 height: 350px !important;
+            }
+            
+            .plinko-ball {
+                width: 26px;
+                height: 26px;
+            }
+            
+            .plinko-pin {
+                width: 9px;
+                height: 9px;
             }
             
             .ball-count-control {
@@ -1411,6 +1432,21 @@
                 font-size: 25px;
             }
             
+            /* ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ ДЛЯ ПЛИНКО */
+            .plinko-board {
+                height: 320px !important;
+            }
+            
+            .plinko-ball {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .plinko-pin {
+                width: 8px;
+                height: 8px;
+            }
+            
             .mines-grid {
                 max-width: 280px;
                 gap: 5px;
@@ -1424,7 +1460,7 @@
             
             .bet-input {
                 width: 80px;
-                font-size: 16px !important; /* ИЗМЕНЕНИЕ: фиксированный для iOS */
+                font-size: 16px !important;
             }
             
             .dice-bet-choice {
@@ -1434,7 +1470,7 @@
             }
         }
 
-        <!-- ИЗМЕНЕНИЕ 5: Улучшение touch-интерфейса -->
+        /* Улучшение отзывчивости для touch-устройств */
         button, .game-card, .roulette-number, .mine-cell, .dice-bet-choice {
             cursor: pointer;
         }
@@ -1449,10 +1485,26 @@
                 transform: scale(1);
             }
         }
+
+        /* Предотвращение переполнения текста */
+        .game-card-title, .game-card-desc, .section-title, .balance {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        /* Исправление для мобильной клавиатуры */
+        .bet-input {
+            font-size: 16px;
+        }
+
+        @media (max-width: 767px) {
+            .bet-input {
+                font-size: 16px !important;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- ВЕСЬ HTML-КОД ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ -->
     <div class="header">
         <div class="logo">
             <i class="fas fa-crown"></i>
@@ -1900,18 +1952,24 @@
     </div>
 
     <script>
-        // Полный JavaScript код для всего сайта
-        // (JavaScript код остается БЕЗ ИЗМЕНЕНИЙ - полностью как в вашем исходном файле)
-        let balance = 1000;
-        let gameHistory = [];
+        // ============================================
+        // ИСПРАВЛЕНИЕ 1: СОХРАНЕНИЕ БАЛАНСА В LOCALSTORAGE
+        // ============================================
+        
+        // Загружаем баланс из localStorage или устанавливаем начальный
+        let balance = parseInt(localStorage.getItem('casinoBalance')) || 1000;
         
         function updateBalance() {
             document.getElementById('balance').textContent = balance;
+            // Сохраняем баланс в localStorage при каждом изменении
+            localStorage.setItem('casinoBalance', balance);
         }
         
+        // Сброс баланса теперь также очищает localStorage
         document.getElementById('reset-balance').addEventListener('click', function() {
             if (confirm("Сбросить баланс до $1000?")) {
                 balance = 1000;
+                localStorage.setItem('casinoBalance', balance);
                 updateBalance();
                 document.querySelectorAll('.game-result').forEach(result => {
                     result.innerHTML = 'Баланс сброшен до $1000!';
@@ -1919,6 +1977,391 @@
                 });
             }
         });
+        
+        // ============================================
+        // ИСПРАВЛЕНИЕ 2: УЛУЧШЕНИЕ ПЛИНКО ДЛЯ МОБИЛЬНЫХ
+        // ============================================
+        
+        // ПЛИНКО с улучшенной физикой для мобильных
+        const plinkoBetControls = setupBetControls('plinko');
+        let isPlinkoActive = false;
+        let plinkoAnimationFrames = [];
+        let activeBalls = [];
+        let ballCount = 1;
+        
+        function initPlinko() {
+            createPlinkoBoard();
+            setupPlinkoControls();
+        }
+        
+        function createPlinkoBoard() {
+            const grid = document.getElementById('plinko-grid');
+            const slots = document.getElementById('plinko-slots');
+            
+            if (!grid || !slots) return;
+            
+            grid.innerHTML = '';
+            slots.innerHTML = '';
+            
+            document.querySelectorAll('.plinko-ball').forEach(ball => ball.remove());
+            activeBalls = [];
+            
+            const board = document.getElementById('plinko-board');
+            const boardRect = board.getBoundingClientRect();
+            const boardWidth = boardRect.width;
+            const boardHeight = boardRect.height;
+            
+            const rows = 8; // Уменьшено количество рядов для мобильных
+            const pinSpacingX = boardWidth / 12; // Адаптивный интервал
+            const pinSpacingY = (boardHeight * 0.5) / rows; // Адаптивный интервал
+            
+            // ИСПРАВЛЕНИЕ: Уменьшена плотность пинов на мобильных
+            for (let row = 0; row < rows; row++) {
+                const pinsInRow = row + 5; // Меньше пинов в ряду
+                const rowStartX = (boardWidth - (pinsInRow * pinSpacingX)) / 2;
+                
+                for (let col = 0; col < pinsInRow; col++) {
+                    const pin = document.createElement('div');
+                    pin.className = 'plinko-pin';
+                    
+                    const x = (rowStartX + col * pinSpacingX) / boardWidth * 100;
+                    const y = (20 + row * pinSpacingY) / boardHeight * 100;
+                    
+                    pin.style.left = `${x}%`;
+                    pin.style.top = `${y}%`;
+                    
+                    grid.appendChild(pin);
+                }
+            }
+            
+            // НОВЫЕ КОЭФФИЦИЕНТЫ: 10x | 3x | 1x | 0.5x | 0x | 0.5x | 1x | 3x | 10x
+            const multipliers = [
+                { value: 10, color: 'slot-0' },
+                { value: 3, color: 'slot-1' },
+                { value: 1, color: 'slot-2' },
+                { value: 0.5, color: 'slot-3' },
+                { value: 0, color: 'slot-4' },
+                { value: 0.5, color: 'slot-5' },
+                { value: 1, color: 'slot-6' },
+                { value: 3, color: 'slot-7' },
+                { value: 10, color: 'slot-8' }
+            ];
+            
+            multipliers.forEach((mult, index) => {
+                const slot = document.createElement('div');
+                slot.className = `plinko-slot ${mult.color}`;
+                slot.innerHTML = `<div class="multiplier">${mult.value}x</div>`;
+                slot.dataset.multiplier = mult.value;
+                slot.dataset.index = index;
+                
+                slots.appendChild(slot);
+            });
+        }
+        
+        function setupPlinkoControls() {
+            const ballMinusBtn = document.getElementById('ball-minus');
+            const ballPlusBtn = document.getElementById('ball-plus');
+            
+            ballMinusBtn.addEventListener('click', function() {
+                if (ballCount > 1) {
+                    ballCount--;
+                    updateBallCount();
+                }
+            });
+            
+            ballPlusBtn.addEventListener('click', function() {
+                if (ballCount < 10) {
+                    ballCount++;
+                    updateBallCount();
+                }
+            });
+            
+            document.getElementById('drop-plinko-btn').addEventListener('click', startPlinkoGame);
+            
+            updateBallCount();
+        }
+        
+        function updateBallCount() {
+            document.getElementById('ball-count').textContent = ballCount;
+            document.getElementById('ball-count-text').textContent = ballCount;
+        }
+        
+        function startPlinkoGame() {
+            if (isPlinkoActive) return;
+            
+            const bet = plinkoBetControls.getBet();
+            const totalBet = bet * ballCount;
+            
+            if (totalBet > balance) {
+                document.getElementById('plinko-result').innerHTML = '<span class="loss">Недостаточно средств!</span>';
+                return;
+            }
+            
+            if (bet < 1) {
+                document.getElementById('plinko-result').innerHTML = '<span class="loss">Минимальная ставка $1!</span>';
+                return;
+            }
+            
+            balance -= totalBet;
+            updateBalance();
+            
+            isPlinkoActive = true;
+            document.getElementById('drop-plinko-btn').disabled = true;
+            document.getElementById('drop-plinko-btn').textContent = 'ШАРЫ ПАДАЮТ...';
+            
+            document.querySelectorAll('.plinko-ball').forEach(ball => ball.remove());
+            activeBalls = [];
+            plinkoAnimationFrames.forEach(frame => cancelAnimationFrame(frame));
+            plinkoAnimationFrames = [];
+            
+            // ИСПРАВЛЕНИЕ: Увеличена задержка между шарами для мобильных
+            for (let i = 0; i < ballCount; i++) {
+                setTimeout(() => {
+                    if (isPlinkoActive) {
+                        createAndDropBall(bet, i);
+                    }
+                }, i * 500); // Увеличена задержка до 500мс
+            }
+        }
+        
+        function createAndDropBall(bet, ballIndex) {
+            const board = document.getElementById('plinko-board');
+            
+            const ball = document.createElement('div');
+            ball.className = 'plinko-ball';
+            
+            // ИСПРАВЛЕНИЕ: Разные цвета шаров для лучшей видимости
+            const colors = [
+                'radial-gradient(circle at 30% 30%, #ff416c, #c2185b)',
+                'radial-gradient(circle at 30% 30%, #2196F3, #0D47A1)',
+                'radial-gradient(circle at 30% 30%, #4CAF50, #2E7D32)',
+                'radial-gradient(circle at 30% 30%, #FF9800, #F57C00)',
+                'radial-gradient(circle at 30% 30%, #9C27B0, #7B1FA2)'
+            ];
+            
+            ball.style.background = colors[ballIndex % colors.length];
+            
+            // ИСПРАВЛЕНИЕ: Случайное смещение по X для предотвращения наложения
+            const spawnX = 50 + (Math.random() - 0.5) * 20;
+            const spawnY = 7;
+            
+            ball.style.left = `${spawnX}%`;
+            ball.style.top = `${spawnY}%`;
+            
+            board.appendChild(ball);
+            
+            const ballData = {
+                element: ball,
+                x: spawnX,
+                y: spawnY,
+                vx: (Math.random() - 0.5) * 0.3, // Уменьшена начальная скорость
+                vy: 0.2, // Уменьшена начальная скорость
+                completed: false,
+                multiplier: 1,
+                slotIndex: -1,
+                bet: bet,
+                id: Date.now() + Math.random() // Уникальный ID для каждого шара
+            };
+            
+            activeBalls.push(ballData);
+            animateBall(ballData);
+        }
+        
+        function animateBall(ballData) {
+            if (!isPlinkoActive || ballData.completed) return;
+            
+            const board = document.getElementById('plinko-board');
+            const boardRect = board.getBoundingClientRect();
+            const pins = document.querySelectorAll('.plinko-pin');
+            const slots = document.querySelectorAll('.plinko-slot');
+            
+            // ИСПРАВЛЕНИЕ: Уменьшена гравитация для мобильных
+            const gravity = 0.015;
+            const friction = 0.98; // Увеличенное трение
+            const bounce = 0.8; // Уменьшенный отскок
+            const ballRadius = boardRect.width * 0.012; // Адаптивный радиус
+            
+            ballData.vy += gravity;
+            
+            ballData.x += ballData.vx;
+            ballData.y += ballData.vy;
+            
+            // ИСПРАВЛЕНИЕ: Улучшенная обработка столкновений с пинами
+            pins.forEach(pin => {
+                const pinRect = pin.getBoundingClientRect();
+                
+                const ballX = boardRect.left + (ballData.x / 100) * boardRect.width;
+                const ballY = boardRect.top + (ballData.y / 100) * boardRect.height;
+                const pinX = pinRect.left + pinRect.width / 2;
+                const pinY = pinRect.top + pinRect.height / 2;
+                
+                const dx = ballX - pinX;
+                const dy = ballY - pinY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const minDistance = ballRadius + pinRect.width / 2;
+                
+                if (distance < minDistance + 1) { // Увеличен буфер
+                    const normalX = dx / distance;
+                    const normalY = dy / distance;
+                    
+                    const dotProduct = ballData.vx * normalX + ballData.vy * normalY;
+                    ballData.vx = ballData.vx - 1.8 * dotProduct * normalX * bounce;
+                    ballData.vy = ballData.vy - 1.8 * dotProduct * normalY * bounce;
+                    
+                    ballData.x += normalX * 0.8;
+                    ballData.y += normalY * 0.8;
+                }
+            });
+            
+            // ИСПРАВЛЕНИЕ: Отталкивание шаров друг от друга
+            activeBalls.forEach(otherBall => {
+                if (otherBall.id === ballData.id || otherBall.completed) return;
+                
+                const ballX = boardRect.left + (ballData.x / 100) * boardRect.width;
+                const ballY = boardRect.top + (ballData.y / 100) * boardRect.height;
+                const otherX = boardRect.left + (otherBall.x / 100) * boardRect.width;
+                const otherY = boardRect.top + (otherBall.y / 100) * boardRect.height;
+                
+                const dx = ballX - otherX;
+                const dy = ballY - otherY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const minDistance = ballRadius * 2;
+                
+                if (distance < minDistance && distance > 0) {
+                    const normalX = dx / distance;
+                    const normalY = dy / distance;
+                    
+                    // Отталкивание шаров
+                    const force = 0.2;
+                    ballData.vx += normalX * force;
+                    ballData.vy += normalY * force;
+                    otherBall.vx -= normalX * force;
+                    otherBall.vy -= normalY * force;
+                    
+                    // Разделение шаров
+                    const separation = (minDistance - distance) / 2;
+                    ballData.x += normalX * separation * 0.5;
+                    ballData.y += normalY * separation * 0.5;
+                    otherBall.x -= normalX * separation * 0.5;
+                    otherBall.y -= normalY * separation * 0.5;
+                }
+            });
+            
+            if (ballData.x <= 3) {
+                ballData.x = 3;
+                ballData.vx = Math.abs(ballData.vx) * bounce;
+            }
+            if (ballData.x >= 97) {
+                ballData.x = 97;
+                ballData.vx = -Math.abs(ballData.vx) * bounce;
+            }
+            
+            ballData.vx *= friction;
+            ballData.vy *= friction;
+            
+            ballData.element.style.left = `${ballData.x}%`;
+            ballData.element.style.top = `${ballData.y}%`;
+            
+            if (ballData.y >= 85) {
+                const slotWidth = 100 / slots.length;
+                const slotIndex = Math.min(slots.length - 1, Math.floor(ballData.x / slotWidth));
+                
+                if (slotIndex >= 0 && slotIndex < slots.length) {
+                    const multiplier = parseFloat(slots[slotIndex].dataset.multiplier);
+                    
+                    if (!ballData.completed) {
+                        ballData.completed = true;
+                        ballData.multiplier = multiplier;
+                        ballData.slotIndex = slotIndex;
+                        
+                        const targetX = (slotIndex * slotWidth) + (slotWidth / 2);
+                        const targetY = 92;
+                        
+                        // Плавное движение к слоту
+                        ballData.x += (targetX - ballData.x) * 0.2;
+                        ballData.y += (targetY - ballData.y) * 0.2;
+                        
+                        ballData.element.style.left = `${ballData.x}%`;
+                        ballData.element.style.top = `${ballData.y}%`;
+                        
+                        slots[slotIndex].classList.add('active');
+                        
+                        setTimeout(() => {
+                            checkAllBallsCompleted();
+                        }, 1500); // Увеличено время ожидания
+                    }
+                }
+            }
+            
+            if (!ballData.completed || (ballData.completed && ballData.y < 91.5)) {
+                const animationFrame = requestAnimationFrame(() => animateBall(ballData));
+                plinkoAnimationFrames.push(animationFrame);
+            }
+        }
+        
+        function checkAllBallsCompleted() {
+            const allCompleted = activeBalls.every(ball => ball.completed);
+            
+            if (allCompleted && activeBalls.length > 0) {
+                finishPlinkoGame();
+            }
+        }
+        
+        function finishPlinkoGame() {
+            const slots = document.querySelectorAll('.plinko-slot');
+            const betPerBall = plinkoBetControls.getBet();
+            const totalBet = betPerBall * ballCount;
+            
+            let totalWinAmount = 0;
+            activeBalls.forEach(ball => {
+                totalWinAmount += betPerBall * ball.multiplier;
+            });
+            
+            balance += totalWinAmount;
+            updateBalance(); // Сохраняем баланс
+            
+            const netProfit = totalWinAmount - totalBet;
+            
+            let resultText = '';
+            
+            if (netProfit > 0) {
+                resultText = `Выигрыш! Общий множитель: ${(totalWinAmount / totalBet).toFixed(2)}x. Чистая прибыль: $${netProfit.toFixed(2)}!`;
+                document.getElementById('plinko-result').innerHTML = `<span class="win">${resultText}</span>`;
+                addToHistory('plinko', `Множитель: ${(totalWinAmount / totalBet).toFixed(2)}x`, netProfit, true);
+            } else if (netProfit < 0) {
+                resultText = `Проигрыш. Общий множитель: ${(totalWinAmount / totalBet).toFixed(2)}x. Чистый убыток: $${Math.abs(netProfit).toFixed(2)}.`;
+                document.getElementById('plinko-result').innerHTML = `<span class="loss">${resultText}</span>`;
+                addToHistory('plinko', `Множитель: ${(totalWinAmount / totalBet).toFixed(2)}x`, Math.abs(netProfit), false);
+            } else {
+                resultText = `Ничья. Общий множитель: ${(totalWinAmount / totalBet).toFixed(2)}x. Ваша ставка возвращена.`;
+                document.getElementById('plinko-result').innerHTML = `<span>${resultText}</span>`;
+                addToHistory('plinko', `Множитель: ${(totalWinAmount / totalBet).toFixed(2)}x`, 0, false);
+            }
+            
+            setTimeout(() => {
+                slots.forEach(slot => slot.classList.remove('active'));
+                
+                activeBalls.forEach(ball => {
+                    if (ball.element && ball.element.parentNode) {
+                        ball.element.remove();
+                    }
+                });
+                
+                isPlinkoActive = false;
+                activeBalls = [];
+                plinkoAnimationFrames.forEach(frame => cancelAnimationFrame(frame));
+                plinkoAnimationFrames = [];
+                
+                document.getElementById('drop-plinko-btn').disabled = false;
+                document.getElementById('drop-plinko-btn').textContent = 'БРОСИТЬ ШАРИК!';
+            }, 3000);
+        }
+        
+        // ============================================
+        // ОСТАЛЬНОЙ КОД ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ
+        // ============================================
+        
+        let gameHistory = [];
         
         function initNavigation() {
             document.querySelectorAll('.mobile-nav-links a, .nav-links a, .play-btn').forEach(link => {
@@ -2001,7 +2444,6 @@
             });
         }
         
-        // Общие функции для ставок
         function setupBetControls(gameId) {
             const betInput = document.getElementById(`${gameId}-bet`);
             const currentBetSpan = document.getElementById(`current-${gameId}-bet`);
@@ -2079,7 +2521,7 @@
             }
             
             balance -= bet;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             
             isSpinning = true;
             spinButton.disabled = true;
@@ -2127,7 +2569,7 @@
                     
                     if (winAmount > 0) {
                         balance += winAmount;
-                        updateBalance();
+                        updateBalance(); // Сохраняем баланс
                         document.getElementById('slot-result').innerHTML = `<span class="win">${resultText} Вы выиграли $${winAmount}!</span>`;
                         addToHistory('slot', resultText, winAmount, true);
                     } else {
@@ -2144,7 +2586,7 @@
             spinAnimation();
         });
         
-        // РУЛЕТКА с исправленными ставками
+        // РУЛЕТКА
         const rouletteBetControls = setupBetControls('roulette');
         let selectedRouletteNumbers = new Set();
         let selectedRouletteBets = new Set();
@@ -2298,7 +2740,7 @@
             }
             
             balance -= totalBetAmount;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             
             isRouletteSpinning = true;
             this.disabled = true;
@@ -2398,7 +2840,7 @@
                     
                     if (totalWinAmount > 0) {
                         balance += totalWinAmount;
-                        updateBalance();
+                        updateBalance(); // Сохраняем баланс
                         const resultText = `Выпало ${winningNumber} (${winningColor === 'red' ? 'красное' : winningColor === 'black' ? 'черное' : 'зеленое'})`;
                         const winText = winDetails.join(', ');
                         document.getElementById('roulette-result').innerHTML = `<span class="win">${resultText}<br>${winText}<br>Общий выигрыш: $${totalWinAmount}!</span>`;
@@ -2524,7 +2966,7 @@
             }
             
             balance -= bet;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             currentBlackjackBet = bet;
             
             gameInProgress = true;
@@ -2578,7 +3020,7 @@
             }
             
             balance -= currentBlackjackBet;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             currentBlackjackBet *= 2;
             
             playerHand.push(deck.pop());
@@ -2634,7 +3076,7 @@
             
             if (winAmount > 0) {
                 balance += winAmount;
-                updateBalance();
+                updateBalance(); // Сохраняем баланс
                 const netWin = winAmount - currentBlackjackBet;
                 document.getElementById('blackjack-result').innerHTML = `<span class="${netWin > 0 ? 'win' : ''}">${resultText} ${netWin > 0 ? `Вы выиграли $${netWin}!` : 'Ваша ставка возвращена.'}</span>`;
                 addToHistory('blackjack', resultText, netWin > 0 ? netWin : 0, netWin > 0);
@@ -2694,7 +3136,7 @@
             }
             
             balance -= bet;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             
             isDiceRolling = true;
             this.disabled = true;
@@ -2760,7 +3202,7 @@
                     
                     if (winAmount > 0) {
                         balance += winAmount;
-                        updateBalance();
+                        updateBalance(); // Сохраняем баланс
                         document.getElementById('dice-result').innerHTML = `<span class="win">${resultText} Вы выиграли $${winAmount}!</span>`;
                         addToHistory('dice', resultText, winAmount, true);
                     } else {
@@ -2774,343 +3216,6 @@
                 }
             }, 100);
         });
-        
-        // ПЛИНКО с новыми коэффициентами и исправленным управлением шарами
-        const plinkoBetControls = setupBetControls('plinko');
-        let isPlinkoActive = false;
-        let plinkoAnimationFrames = [];
-        let activeBalls = [];
-        let ballCount = 1;
-        
-        function initPlinko() {
-            createPlinkoBoard();
-            setupPlinkoControls();
-        }
-        
-        function createPlinkoBoard() {
-            const grid = document.getElementById('plinko-grid');
-            const slots = document.getElementById('plinko-slots');
-            
-            if (!grid || !slots) return;
-            
-            grid.innerHTML = '';
-            slots.innerHTML = '';
-            
-            document.querySelectorAll('.plinko-ball').forEach(ball => ball.remove());
-            activeBalls = [];
-            
-            const boardWidth = 800;
-            const boardHeight = 600;
-            const rows = 10;
-            const pinSpacingX = 60;
-            const pinSpacingY = 45;
-            
-            for (let row = 0; row < rows; row++) {
-                const pinsInRow = row + 7;
-                const rowStartX = (boardWidth - (pinsInRow * pinSpacingX)) / 2;
-                
-                for (let col = 0; col < pinsInRow; col++) {
-                    const pin = document.createElement('div');
-                    pin.className = 'plinko-pin';
-                    
-                    const x = (rowStartX + col * pinSpacingX) / boardWidth * 100;
-                    const y = (150 + row * pinSpacingY) / boardHeight * 100;
-                    
-                    pin.style.left = `${x}%`;
-                    pin.style.top = `${y}%`;
-                    
-                    grid.appendChild(pin);
-                }
-            }
-            
-            // НОВЫЕ КОЭФФИЦИЕНТЫ: 10x | 3x | 1x | 0.5x | 0x | 0.5x | 1x | 3x | 10x
-            const multipliers = [
-                { value: 10, color: 'slot-0' },
-                { value: 3, color: 'slot-1' },
-                { value: 1, color: 'slot-2' },
-                { value: 0.5, color: 'slot-3' },
-                { value: 0, color: 'slot-4' },
-                { value: 0.5, color: 'slot-5' },
-                { value: 1, color: 'slot-6' },
-                { value: 3, color: 'slot-7' },
-                { value: 10, color: 'slot-8' }
-            ];
-            
-            multipliers.forEach((mult, index) => {
-                const slot = document.createElement('div');
-                slot.className = `plinko-slot ${mult.color}`;
-                slot.innerHTML = `<div class="multiplier">${mult.value}x</div>`;
-                slot.dataset.multiplier = mult.value;
-                slot.dataset.index = index;
-                
-                slots.appendChild(slot);
-            });
-        }
-        
-        function setupPlinkoControls() {
-            // ИСПРАВЛЕННОЕ УПРАВЛЕНИЕ КОЛИЧЕСТВОМ ШАРОВ
-            const ballMinusBtn = document.getElementById('ball-minus');
-            const ballPlusBtn = document.getElementById('ball-plus');
-            const ballCountDisplay = document.getElementById('ball-count');
-            const ballCountText = document.getElementById('ball-count-text');
-            
-            // Удаляем старые обработчики
-            ballMinusBtn.replaceWith(ballMinusBtn.cloneNode(true));
-            ballPlusBtn.replaceWith(ballPlusBtn.cloneNode(true));
-            
-            // Получаем новые элементы
-            const newBallMinusBtn = document.getElementById('ball-minus');
-            const newBallPlusBtn = document.getElementById('ball-plus');
-            
-            // Добавляем новые обработчики
-            newBallMinusBtn.addEventListener('click', function() {
-                if (ballCount > 1) {
-                    ballCount--;
-                    updateBallCount();
-                }
-            });
-            
-            newBallPlusBtn.addEventListener('click', function() {
-                if (ballCount < 10) {
-                    ballCount++;
-                    updateBallCount();
-                }
-            });
-            
-            document.getElementById('drop-plinko-btn').addEventListener('click', startPlinkoGame);
-            
-            // Инициализация отображения
-            updateBallCount();
-        }
-        
-        function updateBallCount() {
-            document.getElementById('ball-count').textContent = ballCount;
-            document.getElementById('ball-count-text').textContent = ballCount;
-        }
-        
-        function startPlinkoGame() {
-            if (isPlinkoActive) return;
-            
-            const bet = plinkoBetControls.getBet();
-            const totalBet = bet * ballCount;
-            
-            if (totalBet > balance) {
-                document.getElementById('plinko-result').innerHTML = '<span class="loss">Недостаточно средств!</span>';
-                return;
-            }
-            
-            if (bet < 1) {
-                document.getElementById('plinko-result').innerHTML = '<span class="loss">Минимальная ставка $1!</span>';
-                return;
-            }
-            
-            balance -= totalBet;
-            updateBalance();
-            
-            isPlinkoActive = true;
-            document.getElementById('drop-plinko-btn').disabled = true;
-            document.getElementById('drop-plinko-btn').textContent = 'ШАРЫ ПАДАЮТ...';
-            
-            document.querySelectorAll('.plinko-ball').forEach(ball => ball.remove());
-            activeBalls = [];
-            plinkoAnimationFrames.forEach(frame => cancelAnimationFrame(frame));
-            plinkoAnimationFrames = [];
-            
-            for (let i = 0; i < ballCount; i++) {
-                setTimeout(() => {
-                    if (isPlinkoActive) {
-                        createAndDropBall(bet, i);
-                    }
-                }, i * 300);
-            }
-        }
-        
-        function createAndDropBall(bet, ballIndex) {
-            const board = document.getElementById('plinko-board');
-            
-            const ball = document.createElement('div');
-            ball.className = 'plinko-ball';
-            
-            ball.style.width = '20px';
-            ball.style.height = '20px';
-            ball.style.background = 'radial-gradient(circle at 30% 30%, #ff416c, #c2185b)';
-            
-            const spawnX = 50;
-            const spawnY = 7;
-            
-            ball.style.left = `${spawnX}%`;
-            ball.style.top = `${spawnY}%`;
-            
-            board.appendChild(ball);
-            
-            const ballData = {
-                element: ball,
-                x: spawnX,
-                y: spawnY,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: 0.3,
-                completed: false,
-                multiplier: 1,
-                slotIndex: -1,
-                bet: bet
-            };
-            
-            activeBalls.push(ballData);
-            animateBall(ballData);
-        }
-        
-        function animateBall(ballData) {
-            if (!isPlinkoActive || ballData.completed) return;
-            
-            const board = document.getElementById('plinko-board');
-            const boardRect = board.getBoundingClientRect();
-            const pins = document.querySelectorAll('.plinko-pin');
-            const slots = document.querySelectorAll('.plinko-slot');
-            
-            const gravity = 0.02;
-            const friction = 0.99;
-            const bounce = 0.85;
-            const ballRadius = 10;
-            
-            ballData.vy += gravity;
-            
-            ballData.x += ballData.vx;
-            ballData.y += ballData.vy;
-            
-            pins.forEach(pin => {
-                const pinRect = pin.getBoundingClientRect();
-                
-                const ballX = boardRect.left + (ballData.x / 100) * boardRect.width;
-                const ballY = boardRect.top + (ballData.y / 100) * boardRect.height;
-                const pinX = pinRect.left + pinRect.width / 2;
-                const pinY = pinRect.top + pinRect.height / 2;
-                
-                const dx = ballX - pinX;
-                const dy = ballY - pinY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                const minDistance = ballRadius + pinRect.width / 2;
-                
-                if (distance < minDistance + 2) {
-                    const normalX = dx / distance;
-                    const normalY = dy / distance;
-                    
-                    const dotProduct = ballData.vx * normalX + ballData.vy * normalY;
-                    ballData.vx = ballData.vx - 2 * dotProduct * normalX * bounce;
-                    ballData.vy = ballData.vy - 2 * dotProduct * normalY * bounce;
-                    
-                    ballData.x += normalX * 0.5;
-                    ballData.y += normalY * 0.5;
-                }
-            });
-            
-            if (ballData.x <= 3) {
-                ballData.x = 3;
-                ballData.vx = Math.abs(ballData.vx) * bounce;
-            }
-            if (ballData.x >= 97) {
-                ballData.x = 97;
-                ballData.vx = -Math.abs(ballData.vx) * bounce;
-            }
-            
-            ballData.vx *= friction;
-            ballData.vy *= friction;
-            
-            ballData.element.style.left = `${ballData.x}%`;
-            ballData.element.style.top = `${ballData.y}%`;
-            
-            if (ballData.y >= 85) {
-                const slotWidth = 100 / slots.length;
-                const slotIndex = Math.min(slots.length - 1, Math.floor(ballData.x / slotWidth));
-                
-                if (slotIndex >= 0 && slotIndex < slots.length) {
-                    const multiplier = parseFloat(slots[slotIndex].dataset.multiplier);
-                    
-                    if (!ballData.completed) {
-                        ballData.completed = true;
-                        ballData.multiplier = multiplier;
-                        ballData.slotIndex = slotIndex;
-                        
-                        const targetX = (slotIndex * slotWidth) + (slotWidth / 2);
-                        const targetY = 92;
-                        
-                        ballData.x += (targetX - ballData.x) * 0.3;
-                        ballData.y += (targetY - ballData.y) * 0.3;
-                        
-                        ballData.element.style.left = `${ballData.x}%`;
-                        ballData.element.style.top = `${ballData.y}%`;
-                        
-                        slots[slotIndex].classList.add('active');
-                        
-                        setTimeout(() => {
-                            checkAllBallsCompleted();
-                        }, 1000);
-                    }
-                }
-            }
-            
-            if (!ballData.completed || (ballData.completed && ballData.y < 91.5)) {
-                const animationFrame = requestAnimationFrame(() => animateBall(ballData));
-                plinkoAnimationFrames.push(animationFrame);
-            }
-        }
-        
-        function checkAllBallsCompleted() {
-            const allCompleted = activeBalls.every(ball => ball.completed);
-            
-            if (allCompleted && activeBalls.length > 0) {
-                finishPlinkoGame();
-            }
-        }
-        
-        function finishPlinkoGame() {
-            const slots = document.querySelectorAll('.plinko-slot');
-            const betPerBall = plinkoBetControls.getBet();
-            const totalBet = betPerBall * ballCount;
-            
-            let totalWinAmount = 0;
-            activeBalls.forEach(ball => {
-                totalWinAmount += betPerBall * ball.multiplier;
-            });
-            
-            balance += totalWinAmount;
-            updateBalance();
-            
-            const netProfit = totalWinAmount - totalBet;
-            
-            let resultText = '';
-            
-            if (netProfit > 0) {
-                resultText = `Выигрыш! Общий множитель: ${(totalWinAmount / totalBet).toFixed(2)}x. Чистая прибыль: $${netProfit.toFixed(2)}!`;
-                document.getElementById('plinko-result').innerHTML = `<span class="win">${resultText}</span>`;
-                addToHistory('plinko', `Множитель: ${(totalWinAmount / totalBet).toFixed(2)}x`, netProfit, true);
-            } else if (netProfit < 0) {
-                resultText = `Проигрыш. Общий множитель: ${(totalWinAmount / totalBet).toFixed(2)}x. Чистый убыток: $${Math.abs(netProfit).toFixed(2)}.`;
-                document.getElementById('plinko-result').innerHTML = `<span class="loss">${resultText}</span>`;
-                addToHistory('plinko', `Множитель: ${(totalWinAmount / totalBet).toFixed(2)}x`, Math.abs(netProfit), false);
-            } else {
-                resultText = `Ничья. Общий множитель: ${(totalWinAmount / totalBet).toFixed(2)}x. Ваша ставка возвращена.`;
-                document.getElementById('plinko-result').innerHTML = `<span>${resultText}</span>`;
-                addToHistory('plinko', `Множитель: ${(totalWinAmount / totalBet).toFixed(2)}x`, 0, false);
-            }
-            
-            setTimeout(() => {
-                slots.forEach(slot => slot.classList.remove('active'));
-                
-                activeBalls.forEach(ball => {
-                    if (ball.element && ball.element.parentNode) {
-                        ball.element.remove();
-                    }
-                });
-                
-                isPlinkoActive = false;
-                activeBalls = [];
-                plinkoAnimationFrames.forEach(frame => cancelAnimationFrame(frame));
-                plinkoAnimationFrames = [];
-                
-                document.getElementById('drop-plinko-btn').disabled = false;
-                document.getElementById('drop-plinko-btn').textContent = 'БРОСИТЬ ШАРИК!';
-            }, 2000);
-        }
         
         // КРАШ
         const crashBetControls = setupBetControls('crash');
@@ -3161,7 +3266,7 @@
             }
             
             balance -= bet;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             playerBet = bet;
             
             crashGameActive = true;
@@ -3243,7 +3348,7 @@
             const winAmount = playerBet * crashMultiplier;
             
             balance += winAmount;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             
             const resultText = `Вы забрали выигрыш при множителе ${crashMultiplier.toFixed(2)}x`;
             document.getElementById('crash-result').innerHTML = `<span class="win">${resultText} Вы выиграли $${(winAmount - playerBet).toFixed(2)}!</span>`;
@@ -3402,7 +3507,7 @@
                     const winAmount = currentMinesBet * multiplier;
                     
                     balance += winAmount;
-                    updateBalance();
+                    updateBalance(); // Сохраняем баланс
                     
                     document.getElementById('mines-result').innerHTML = `<span class="win">Вы нашли все алмазы! Вы выиграли $${(winAmount - currentMinesBet).toFixed(2)}!</span>`;
                     addToHistory('mines', 'Нашел все алмазы', (winAmount - currentMinesBet).toFixed(2), true);
@@ -3430,7 +3535,7 @@
             }
             
             balance -= bet;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             currentMinesBet = bet;
             
             foundDiamonds = 0;
@@ -3459,7 +3564,7 @@
             const winAmount = currentMinesBet * multiplier;
             
             balance += winAmount;
-            updateBalance();
+            updateBalance(); // Сохраняем баланс
             
             const resultText = `Забрал выигрыш с ${foundDiamonds} алмазами`;
             document.getElementById('mines-result').innerHTML = `<span class="win">${resultText} Вы выиграли $${(winAmount - currentMinesBet).toFixed(2)}!</span>`;
@@ -3503,7 +3608,7 @@
         
         // Инициализация при загрузке
         window.onload = function() {
-            updateBalance();
+            updateBalance(); // Загружаем сохраненный баланс
             initNavigation();
             
             if (window.innerWidth < 1024) {
@@ -3539,6 +3644,15 @@
                 if (document.getElementById('plinko-section').classList.contains('active')) {
                     setTimeout(initPlinko, 100);
                 }
+            });
+            
+            // Добавляем обработчик для пересоздания плинко при изменении ориентации
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    if (document.getElementById('plinko-section').classList.contains('active')) {
+                        initPlinko();
+                    }
+                }, 300);
             });
         };
     </script>

@@ -2,15 +2,24 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ИЗМЕНЕНИЕ 1: Улучшен viewport для мобильных -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Casino Royale - Игровой портал</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        <!-- ИЗМЕНЕНИЕ 2: Добавлены глобальные улучшения для мобильных -->
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе */
+            -webkit-text-size-adjust: 100%; /* Предотвращает авто-масштаб текста в iOS */
+        }
+
+        <!-- ИЗМЕНЕНИЕ 3: Предотвращение горизонтальной прокрутки -->
+        html {
+            overflow-x: hidden;
         }
 
         body {
@@ -19,6 +28,8 @@
             min-height: 100vh;
             overflow-x: hidden;
             padding-top: 60px;
+            touch-action: pan-y; /* Предотвращает нежелательный зум */
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
         }
 
         .header {
@@ -48,6 +59,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            word-wrap: break-word;
         }
 
         .logo i {
@@ -69,6 +82,8 @@
         .balance {
             font-weight: bold;
             color: #ffd700;
+            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            word-wrap: break-word;
         }
 
         .reset-balance {
@@ -244,6 +259,8 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            word-wrap: break-word;
         }
 
         .warning {
@@ -290,6 +307,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            word-wrap: break-word;
         }
 
         .game-card-body {
@@ -301,6 +320,8 @@
             line-height: 1.5;
             margin-bottom: 15px;
             font-size: 14px;
+            overflow-wrap: break-word; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
+            word-wrap: break-word;
         }
 
         .play-btn {
@@ -336,6 +357,7 @@
             flex-direction: column;
             gap: 15px;
             margin-bottom: 20px;
+            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
         }
 
         .bet-controls {
@@ -343,6 +365,7 @@
             flex-wrap: wrap;
             gap: 10px;
             align-items: center;
+            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
         }
 
         .bet-btn {
@@ -384,7 +407,7 @@
             color: #fff;
             padding: 8px 12px;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 16px; /* ИЗМЕНЕНИЕ: фиксированный размер для iOS */
             width: 120px;
             max-width: 100%;
         }
@@ -617,6 +640,7 @@
             margin: 20px 0;
             justify-content: center;
             flex-wrap: wrap;
+            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
         }
 
         .ball-count-control {
@@ -893,6 +917,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
+            max-width: 100%; /* ИЗМЕНЕНИЕ: предотвращение переполнения */
         }
 
         .crash-btn {
@@ -1135,15 +1160,178 @@
             }
         }
 
-        @media (max-width: 374px) {
+        <!-- ИЗМЕНЕНИЕ 4: Дополнительные медиа-запросы для мобильных -->
+        @media (max-width: 767px) {
+            .header {
+                padding: 10px 15px;
+            }
+            
+            .logo h1 {
+                font-size: 18px;
+            }
+            
+            .balance-container {
+                padding: 6px 10px;
+                font-size: 13px;
+            }
+            
+            .reset-balance {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .game-card-title {
+                font-size: 16px;
+            }
+            
+            .game-card-desc {
+                font-size: 13px;
+            }
+            
+            .play-btn, .spin-btn, .bet-btn, .allin-btn, .crash-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .slot-machine {
+                gap: 5px;
+            }
+            
+            .slot-reel {
+                width: 70px;
+                height: 70px;
+                font-size: 35px;
+            }
+            
+            .plinko-board {
+                height: 400px !important;
+            }
+            
+            .plinko-slots-container {
+                height: 90px;
+            }
+            
+            .plinko-slot .multiplier {
+                font-size: 16px !important;
+            }
+            
+            .roulette-table {
+                padding: 10px;
+                margin: 15px 0;
+            }
+            
+            .roulette-numbers {
+                min-width: 320px;
+                grid-template-columns: repeat(13, 1fr);
+                gap: 2px;
+            }
+            
+            .roulette-number {
+                height: 35px;
+                font-size: 12px;
+            }
+            
+            .cards-container {
+                gap: 5px;
+            }
+            
+            .card {
+                width: 50px;
+                height: 70px;
+                font-size: 18px;
+            }
+            
+            .card-suit {
+                font-size: 14px;
+            }
+            
+            .crash-container {
+                height: 200px;
+            }
+            
+            .crash-multiplier {
+                font-size: 28px;
+                margin: 10px 0;
+                height: 40px;
+            }
+            
+            .mines-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 6px;
+                max-width: 320px;
+            }
+            
+            .mine-cell {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+            
+            .bet-input {
+                width: 90px;
+                font-size: 16px !important; /* ИЗМЕНЕНИЕ: фиксированный для iOS */
+                padding: 6px 10px;
+            }
+            
+            .game-controls {
+                gap: 12px;
+            }
+            
+            .bet-controls {
+                gap: 8px;
+            }
+            
+            .game-result {
+                padding: 10px;
+                font-size: 14px;
+                min-height: 50px;
+            }
+            
+            .history {
+                padding: 10px;
+            }
+            
+            .history h3 {
+                font-size: 16px;
+            }
+            
+            .history-item {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 16px;
+            }
+            
             .mobile-nav-links a {
                 padding: 8px 10px;
                 min-width: 60px;
-                font-size: 10px;
+                font-size: 11px;
             }
             
             .mobile-nav-links i {
                 font-size: 16px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
             }
             
             .slot-reel {
@@ -1152,36 +1340,119 @@
                 font-size: 30px;
             }
             
+            .plinko-board {
+                height: 350px !important;
+            }
+            
+            .ball-count-control {
+                padding: 8px 15px;
+            }
+            
+            .ball-count-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .ball-count-display {
+                font-size: 20px;
+                min-width: 40px;
+            }
+            
+            .dice-bet-choice {
+                min-width: 110px;
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            
+            .dice-explanation {
+                font-size: 11px;
+            }
+            
+            .roulette-numbers {
+                min-width: 280px;
+            }
+            
+            .roulette-number {
+                height: 30px;
+                font-size: 11px;
+            }
+            
+            .roulette-bets {
+                gap: 8px;
+            }
+            
+            .roulette-bet {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .crash-btn {
+                min-width: 130px;
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 374px) {
+            .logo h1 {
+                font-size: 14px;
+            }
+            
+            .mobile-nav-links a {
+                padding: 7px 8px;
+                min-width: 55px;
+                font-size: 10px;
+            }
+            
+            .slot-reel {
+                width: 55px;
+                height: 55px;
+                font-size: 25px;
+            }
+            
             .mines-grid {
-                grid-template-columns: repeat(5, 1fr);
+                max-width: 280px;
                 gap: 5px;
             }
             
             .mine-cell {
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
                 font-size: 16px;
             }
             
             .bet-input {
-                width: 100px;
-            }
-            
-            .crash-btn {
-                padding: 10px 15px;
-                font-size: 14px;
-                min-width: 120px;
+                width: 80px;
+                font-size: 16px !important; /* ИЗМЕНЕНИЕ: фиксированный для iOS */
             }
             
             .dice-bet-choice {
-                min-width: 100px;
-                padding: 8px 10px;
+                min-width: 95px;
+                padding: 7px 10px;
                 font-size: 12px;
+            }
+        }
+
+        <!-- ИЗМЕНЕНИЕ 5: Улучшение touch-интерфейса -->
+        button, .game-card, .roulette-number, .mine-cell, .dice-bet-choice {
+            cursor: pointer;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            button:active, .game-card:active, .roulette-number:active, .mine-cell:active, .dice-bet-choice:active {
+                opacity: 0.7;
+                transform: scale(0.98);
+            }
+            
+            .bet-btn.active, .dice-bet-choice.active, .roulette-number.selected, .roulette-bet.selected {
+                transform: scale(1);
             }
         }
     </style>
 </head>
 <body>
+    <!-- ВЕСЬ HTML-КОД ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ -->
     <div class="header">
         <div class="logo">
             <i class="fas fa-crown"></i>
@@ -1630,6 +1901,7 @@
 
     <script>
         // Полный JavaScript код для всего сайта
+        // (JavaScript код остается БЕЗ ИЗМЕНЕНИЙ - полностью как в вашем исходном файле)
         let balance = 1000;
         let gameHistory = [];
         
